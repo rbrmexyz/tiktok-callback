@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head><title>TikTok Auth Callback</title></head>
+<body style="font-family:sans-serif;text-align:center;padding:60px">
+<h2>TikTok Authorization</h2>
+<div id="result"></div>
+<script>
+const params = new URLSearchParams(window.location.search);
+const code = params.get('code');
+const error = params.get('error');
+const el = document.getElementById('result');
+if (code) {
+  el.innerHTML = '<p style="color:green;font-size:20px">Success! Copy this code:</p>' +
+    '<input style="font-size:18px;padding:10px;width:80%;text-align:center" value="' + code + '" onclick="this.select()" readonly>' +
+    '<p>Paste it back in your terminal.</p>';
+} else if (error) {
+  el.innerHTML = '<p style="color:red">Error: ' + error + '</p><p>' + (params.get('error_description') || '') + '</p>';
+} else {
+  el.innerHTML = '<p>Waiting for TikTok redirect...</p>';
+}
+</script>
+</body>
+</html>
